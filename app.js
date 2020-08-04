@@ -12,32 +12,16 @@ window.addEventListener('keypress', function (e) {
     guessesEl.textContent = game1.StatusMessage
 })
 
-//making HTTP request 
-const request = new XMLHttpRequest()
-request.addEventListener('readystatechange' ,(e) => {
-	if(e.target.readyState === 4 && e.target.status === 200) {
-		const data =JSON.parse(e.target.responseText)
-		console.log(data)
-	} else if(e.target.readyState === 4) {
-		console.log("And an error is taken")
-	}
+
+getPuzzel('1').then((data) => {
+	console.log(data)
+},(data) => {
+	console.log(`Error: ${data}`)
 })
 
-request.open('GET' ,'http://puzzle.mead.io/puzzle')
-request.send()
-//making HTTP request 
-const countryCode='US'
-const request1 = new XMLHttpRequest()
-
-request1.addEventListener('readystatechange', (e) => {
-	if(e.target.readyState === 4 && e.target.status === 200) {
-		const data =JSON.parse(e.target.responseText)
-		countryName=data.find((country) => {
-				return country.alpha2Code === countryCode
-			})
-		console.log(countryName.name)
-	}
-})
-request1.open('GET', 'http://restcountries.eu/rest/v2/all')
-request1.send()
-#
+const countryCode='IN'
+getCountry(countryCode).then((data) => {
+		console.log(`The country name is ${data.name}`)
+	},(data) => {
+		console.log(`Error:${error}`)
+	})
