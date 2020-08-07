@@ -26,4 +26,5 @@ getCountry(countryCode).then((data) => {
 		console.log(`Error:${error}`)
 	})
 
+console.log("hello")
 
