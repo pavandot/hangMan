@@ -13,12 +13,18 @@ document.querySelector('#reset').addEventListener('click',() => {
 })
 
 const render = () => {
-    puzzleEl.textContent = game1.Puzzle
-    guessesEl.textContent = game1.StatusMessage
+    puzzleEl.innerHTML=''
+	guessesEl.textContent = game1.StatusMessage
+	game1.Puzzle.split('').forEach((letter) => {
+		const letterEl = document.createElement('span')
+		letterEl.textContent=letter
+		puzzleEl.appendChild(letterEl)
+	})
 }
 
 const startGame = async () => {
 	const puzzle = await getPuzzel('1')
+	console.log(puzzle)
 	game1 = new Hangman(puzzle,5) 
 	render()
 }
